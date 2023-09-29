@@ -1,16 +1,9 @@
-# app
+# App Refugio para Animales
 
-A new Flutter project.
+*Autor: * Sergio David Acevedo Sanchez
 
-## Getting Started
+Permite administrar el listado de animales ( peros y gatos) que estan en adopcion en el refugio
 
-This project is a starting point for a Flutter application.
+![Imagen Principal](img/img01.png)
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Menu: el menu contiene dos botones que son Perros y Gatos, al seleccionar alguno de estos se dirige a una pestana con una lista de los animales para adopcion, tambien tendra un boton de agregar para cuando llegue un nuevo animal al refugio, al seleccionar el animal saldra una imagen con su descripcion y un boton de eliminar, que si en este caso, el animal es adoptado, se elimina de la lista
