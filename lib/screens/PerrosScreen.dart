@@ -46,9 +46,7 @@ class PerrosScreen extends StatelessWidget {
               children: [
                 ElevatedButton.icon(
                   onPressed: () {
-                    // Aquí puedes agregar la lógica para agregar un nuevo perro
-                    // Por ejemplo, puedes mostrar un cuadro de diálogo para ingresar los detalles del nuevo perro
-                    // y luego agregarlo a la lista de perros.
+                    // logica
                   },
                   icon: const Icon(Icons.add),
                   label: const Text('Agregar'),
@@ -56,8 +54,7 @@ class PerrosScreen extends StatelessWidget {
                 const SizedBox(width: 16.0), // Espacio entre botones
                 ElevatedButton.icon(
                   onPressed: () {
-                    // Aquí puedes agregar la lógica para eliminar un perro
-                    // Puedes implementar una confirmación antes de eliminar.
+                    // logica
                   },
                   icon: const Icon(Icons.delete),
                   label: const Text('Eliminar'),
