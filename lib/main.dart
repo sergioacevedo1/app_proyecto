@@ -1,3 +1,4 @@
+import 'package:app/listas/ListaAnimal.dart';
 import 'package:app/screens/GatosScreen.dart';
 import 'package:app/screens/MenuScreen.dart';
 import 'package:app/screens/PerrosScreen.dart';
@@ -21,8 +22,10 @@ class MyApp extends StatelessWidget {
       initialRoute: '/', // Ruta inicial de la aplicación
       routes: {
         '/': (context) => const MenuScreen(),
-        '/perros': (context) => const PerrosScreen(),
-        '/gatos': (context) => const GatosScreen(),
+        '/perros': (context) => PerrosScreen(perros: perros),
+        '/gatos': (context) => GatosScreen(
+              gatos: gatos,
+            ),
       },
     );
   }
