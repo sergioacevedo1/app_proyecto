@@ -1,4 +1,4 @@
-import 'package:app/animales/Animales.dart';
+import 'package:app/models/Animales.dart';
 import 'package:app/screens/DetallesAnimalScreen.dart';
 import 'package:flutter/material.dart';
 

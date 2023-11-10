@@ -1,10 +1,12 @@
-import 'package:app/animales/Animales.dart';
+import 'package:app/models/AnimalModel.dart';
+import 'package:app/models/Animales.dart';
 import 'package:flutter/material.dart';
 
 class DetallesAnimalScreen extends StatelessWidget {
   final Animal animal;
 
-  const DetallesAnimalScreen({super.key, required this.animal});
+  const DetallesAnimalScreen(
+      {super.key, required this.animal, required AnimalModel dataReceived});
 
   @override
   Widget build(BuildContext context) {

@@ -1,0 +1,29 @@
+import 'package:flutter/material.dart';
+
+class AnimalService extends ChangeNotifier {
+  List<AnimalModel> animales = [];
+
+  getAllAnimales() async {
+    final animales = await SQLiteService.db.getAllAnimales();
+    this.animales = [...animales];
+    notifyListeners();
+  }
+
+  delete(int id) async {
+    final int res = await SQLiteService.db.deleteAnimal(id);
+    if (res > 0) {
+      getAllAnimales();
+    }
+  }
+
+  create(AnimalModel animal) async {
+    final int res = await SQLiteService.db.insertAnimal(animal);
+    animal.id = res;
+    return animal;
+  }
+
+  update(AnimalModel animal) async {
+    await SQLiteService.db.updateAnimal(animal);
+    return animal;
+  }
+}

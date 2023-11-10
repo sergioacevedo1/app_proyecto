@@ -1,4 +1,4 @@
-import 'package:app/animales/Animales.dart';
+import 'package:app/models/Animales.dart';
 
 List<Animal> perros = [
   Animal(nombre: 'Max', edad: 3, estado: 'En proceso'),

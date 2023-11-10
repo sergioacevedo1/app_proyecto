@@ -1,32 +1,53 @@
-import 'package:app/listas/ListaAnimal.dart';
-import 'package:app/screens/GatosScreen.dart';
-import 'package:app/screens/MenuScreen.dart';
-import 'package:app/screens/PerrosScreen.dart';
+import 'package:app/screens/AnimalScreen.dart';
+import 'package:app/screens/LocalScreen.dart';
+import 'package:app/screens/animal_details_screen.dart';
+import 'package:app/screens/screens.dart';
+import 'package:app/services/uiChange_service.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'services/animal_service.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const AppState());
+}
+
+class AppState extends StatelessWidget {
+  const AppState({Key? key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+            create: (_) => AnimalService()), // Cambia a tu servicio de animales
+        ChangeNotifierProvider(
+            create: (_) => UIAnimalService()), // Cambia a tu servicio UI
+        // Puedes agregar más providers según sea necesario
+      ],
+      child: const MyApp(),
+    );
+  }
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Refugio de Animales',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      initialRoute: '/', // Ruta inicial de la aplicación
+      initialRoute: 'home',
       routes: {
-        '/': (context) => const MenuScreen(),
-        '/perros': (context) => PerrosScreen(perros: perros),
-        '/gatos': (context) => GatosScreen(
-              gatos: gatos,
-            ),
+        'home': (context) => const MenuScreen(),
+        'animal' (context) => const AnimalScreen(),
+        'animal_local': (context) => const AnimalLocalScreen(),
+        
       },
+      theme: ThemeData(
+          // Configura tu tema según sea necesario
+          ),
     );
   }
 }
