@@ -27,7 +27,7 @@ class AnimalService extends ChangeNotifier {
       final Map<String, dynamic> animalesMap = json.decode(response.body);
       animalesMap.forEach((key, value) {
         final animalTemp = AnimalModel.fromJson(value);
-        animalTemp.id = key as int;
+        animalTemp.id = int.parse(key);
         animales.add(animalTemp);
       });
     }
@@ -63,4 +63,8 @@ class AnimalService extends ChangeNotifier {
     final response = await http.delete(url);
     load();
   }
+
+  static void getAllAnimales() {}
+
+  void deleteAnimal(int i) {}
 }

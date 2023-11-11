@@ -23,6 +23,7 @@ class AppState extends StatelessWidget {
             create: (_) => AnimalService()), // Cambia a tu servicio de animales
         ChangeNotifierProvider(
             create: (_) => UIAnimalService()), // Cambia a tu servicio UI
+
         // Puedes agregar más providers según sea necesario
       ],
       child: const MyApp(),
@@ -41,13 +42,16 @@ class MyApp extends StatelessWidget {
       initialRoute: 'home',
       routes: {
         'home': (context) => const MenuScreen(),
-        'animal' (context) => const AnimalScreen(),
-        'animal_local': (context) => const AnimalLocalScreen(),
-        
+        'animales': (context) => AnimalScreen(),
+        'local': (context) => const AnimalLocalScreen(),
       },
       theme: ThemeData(
-          // Configura tu tema según sea necesario
-          ),
+        hintColor: Colors.green,
+        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue)
+            .copyWith(
+                background: Colors.white), // Color de fondo de la aplicación
+        // Ajusta otros atributos de tema
+      ),
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:app/models/AnimalModel.dart';
 import 'package:app/screens/animal_details_screen.dart';
+import 'package:app/screens/screens.dart';
 import 'package:app/services/animal_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -10,7 +11,7 @@ class AnimalLocalScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final animalService = Provider.of<AnimalService>(context);
-    animalService.getAllAnimales();
+    AnimalService.getAllAnimales();
     List<AnimalModel> animales = animalService.animales;
 
     return Scaffold(
@@ -52,7 +53,7 @@ class AnimalLocalScreen extends StatelessWidget {
         onPressed: () {
           Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (context) => AnimalDetailsScreen(),
+              builder: (context) => AnimalScreen(),
             ),
           );
         },
