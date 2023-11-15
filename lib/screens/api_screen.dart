@@ -3,7 +3,7 @@ import 'package:app/screens/LoadScreen.dart';
 import 'package:app/services/animal_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../widgets/ListRefugio.dart';
+import '../widgets/ListAnimal.dart';
 
 class ApiScreen extends StatelessWidget {
   const ApiScreen({Key? key});

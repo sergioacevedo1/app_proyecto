@@ -31,7 +31,7 @@ class AnimalSQLiteService {
       onCreate: (Database db, int version) async {
         await db.execute('''
           CREATE TABLE animales ( 
-            id TEXT PRIMARY KEY
+            id TEXT PRIMARY KEY,
             nombre TEXT,
             edad INTEGER,
             estado TEXT
@@ -43,7 +43,7 @@ class AnimalSQLiteService {
 
   Future<String> insertAnimal(AnimalModel animal) async {
     final db = await database;
-    final String id = await db.insert('animales', animal.toJson());
+    final String id = (await db!.insert('animales', animal.toJson())) as String;
     return id;
   }
 
@@ -83,13 +83,13 @@ class AnimalSQLiteService {
     return list;
   }
 
-  Future<AnimalModel?> getAnimalById(int id) async {
+  Future<AnimalModel?> getAnimalByName(String nombre) async {
     final db = await database;
 
     final res = await db!.query(
       'animales',
-      where: 'id = ?',
-      whereArgs: [id],
+      where: 'nombre = ?',
+      whereArgs: [nombre],
     );
 
     return res.isNotEmpty ? AnimalModel.fromJson(res.first) : null;

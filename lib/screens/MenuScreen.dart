@@ -4,6 +4,7 @@ import 'package:app/models/models.dart';
 import 'package:app/screens/AnimalFormScreen.dart';
 import 'package:app/screens/LoadScreen.dart';
 import 'package:app/services/animal_service.dart';
+import 'package:app/services/sqlite_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -35,13 +36,21 @@ class MenuScreen extends StatelessWidget {
           itemCount: listAnimales.length,
           itemBuilder: (BuildContext context, int index) {
             return GestureDetector(
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) =>
-                        AnimalDetailsScreen(dataReceived: listAnimales[index]),
-                  ),
-                );
+              onTap: () async {
+                // Obtener el animal por nombre desde SQLite
+                String nombreAnimal = listAnimales[index].nombre;
+                AnimalModel? animalSQLite =
+                    await AnimalSQLiteService.db.getAnimalByName(nombreAnimal);
+
+                // Navegar a la pantalla de detalles del animal
+                if (animalSQLite != null) {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          AnimalDetailsScreen(dataReceived: animalSQLite),
+                    ),
+                  );
+                }
               },
               child: Container(
                 margin: EdgeInsets.all(10),
@@ -99,7 +108,8 @@ class MenuScreen extends StatelessWidget {
                 await animalService.saveLocally(listAnimales);
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
-                      content: Text('Animales guardados localmente')),
+                    content: Text('Animales guardados localmente'),
+                  ),
                 );
               },
             ),
@@ -107,12 +117,5 @@ class MenuScreen extends StatelessWidget {
         ),
       ],
     );
-  }
-
-  Future<void> saveAnimalesLocal(List<AnimalModel> animales) async {
-    final prefs = await SharedPreferences.getInstance();
-    final animalesJson = animales.map((animal) => animal.toJson()).toList();
-    await prefs.setStringList(
-        'animales', animalesJson.map((e) => jsonEncode(e)).toList());
   }
 }

@@ -1,6 +1,7 @@
 import 'package:app/screens/AnimalScreen.dart';
 import 'package:app/screens/LocalScreen.dart';
 import 'package:app/screens/screens.dart';
+import 'package:app/services/AnimalService.dart';
 import 'package:app/services/uiChange_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -20,6 +21,7 @@ class AppState extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => AnimalService()),
         ChangeNotifierProvider(create: (_) => UIAnimalService()),
+        ChangeNotifierProvider(create: (_) => AnimalServiceLocal()),
 
         // Puedes agregar más providers según sea necesario
       ],

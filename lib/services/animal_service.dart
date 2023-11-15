@@ -13,12 +13,22 @@ class AnimalService extends ChangeNotifier {
     load();
   }
 
-  Future<List<AnimalModel>> load({bool isUsedLoading = true}) async {
+  Future<void> load({bool isUsedLoading = true}) async {
     if (isUsedLoading) {
       isLoading = true;
       notifyListeners();
     }
 
+    // Cargar animales desde Firebase
+    await loadFromFirebase();
+
+    if (isUsedLoading) {
+      isLoading = false;
+      notifyListeners();
+    }
+  }
+
+  Future<void> loadFromFirebase() async {
     final url = Uri.parse(
         'https://crudsergio-ace1-default-rtdb.firebaseio.com/Animales.json');
 
@@ -34,10 +44,8 @@ class AnimalService extends ChangeNotifier {
       });
     }
 
-    if (isUsedLoading) isLoading = false;
-    notifyListeners();
-
-    return animales;
+    // Guardar localmente después de cargar desde Firebase
+    await saveLocally(animales);
   }
 
   Future<void> post(AnimalModel animal) async {
@@ -46,7 +54,9 @@ class AnimalService extends ChangeNotifier {
 
     String data = jsonEncode(animal);
     final response = await http.post(url, body: data);
-    load();
+
+    // Actualiza la lista de animales desde Firebase
+    await loadFromFirebase();
   }
 
   Future<void> put(AnimalModel animal) async {
@@ -55,7 +65,9 @@ class AnimalService extends ChangeNotifier {
 
     String data = jsonEncode(animal);
     final response = await http.put(url, body: data);
-    load();
+
+    // Actualiza la lista de animales desde Firebase
+    await loadFromFirebase();
   }
 
   Future<void> delete(AnimalModel animal) async {
@@ -63,7 +75,9 @@ class AnimalService extends ChangeNotifier {
         'https://crudsergio-ace1-default-rtdb.firebaseio.com/Animales/${animal.id}.json');
 
     final response = await http.delete(url);
-    load();
+
+    // Actualiza la lista de animales desde Firebase
+    await loadFromFirebase();
   }
 
   Future<void> saveLocally(List<AnimalModel> animales) async {
@@ -80,9 +94,9 @@ class AnimalService extends ChangeNotifier {
     final String res = await AnimalSQLiteService.db.insertAnimal(animal);
 
     // Asigna el ID devuelto por la base de datos al objeto AnimalModel
-    animal.id = res as String?;
+    animal.id = res;
 
     // Actualiza la lista de animales desde Firebase
-    await load();
+    await loadFromFirebase();
   }
 }
