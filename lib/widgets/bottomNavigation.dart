@@ -19,12 +19,18 @@ class BottomNavigationBarCustom extends StatelessWidget {
           uiService.selectedAnimalOpt = index, // Utiliza la variable adecuada
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
-          icon: Icon(Icons.pets), // Cambia el icono según tus necesidades
+          icon: Icon(
+            Icons.pets,
+            color: Colors.green,
+          ), // Cambia el icono según tus necesidades
           label:
               'Lista de Animales', // Cambia la etiqueta según tus necesidades
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.add), // Cambia el icono según tus necesidades
+          icon: Icon(
+            Icons.add,
+            color: Colors.red,
+          ), // Cambia el icono según tus necesidades
           label: 'Agregar Animal', // Cambia la etiqueta según tus necesidades
         ),
       ],

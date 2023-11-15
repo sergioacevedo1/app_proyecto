@@ -3,7 +3,7 @@ import 'package:app/screens/LoadScreen.dart';
 import 'package:app/services/animal_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../widgets/ListScreen.dart';
+import '../widgets/ListRefugio.dart';
 
 class ApiScreen extends StatelessWidget {
   const ApiScreen({Key? key});
@@ -38,7 +38,7 @@ class ApiScreen extends StatelessWidget {
         child: const Icon(
           Icons.add,
           size: 50,
-          color: Colors.blue,
+          color: Colors.red,
         ),
       ),
     );

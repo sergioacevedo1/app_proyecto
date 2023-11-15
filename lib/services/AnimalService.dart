@@ -2,7 +2,7 @@ import 'package:app/models/AnimalModel.dart';
 import 'package:flutter/material.dart';
 import 'package:app/services/sqlite_service.dart';
 
-class AnimalService extends ChangeNotifier {
+class AnimalServiceLocal extends ChangeNotifier {
   List<AnimalModel> animales = [];
 
   getAllAnimales() async {
@@ -19,7 +19,7 @@ class AnimalService extends ChangeNotifier {
   }
 
   create(AnimalModel animal) async {
-    final int res = await AnimalSQLiteService.db.insertAnimal(animal);
+    final String res = (await AnimalSQLiteService.db.insertAnimal(animal));
     animal.id = res;
     return animal;
   }
@@ -28,6 +28,4 @@ class AnimalService extends ChangeNotifier {
     await AnimalSQLiteService.db.updateAnimal(animal);
     return animal;
   }
-
-  void getAllPerros() {}
 }

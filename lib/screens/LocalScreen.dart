@@ -11,7 +11,7 @@ class AnimalLocalScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final animalService = Provider.of<AnimalService>(context);
-    AnimalService.getAllAnimales();
+    //AnimalService.getAllAnimales();
     List<AnimalModel> animales = animalService.animales;
 
     return Scaffold(
@@ -41,7 +41,7 @@ class AnimalLocalScreen extends StatelessWidget {
                 IconButton(
                   icon: const Icon(Icons.delete),
                   onPressed: () {
-                    animalService.deleteAnimal(animales[index].id!);
+                    animalService.delete(animales[index]);
                   },
                 ),
               ],

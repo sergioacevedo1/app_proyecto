@@ -1,9 +1,12 @@
+import 'dart:convert';
+
 import 'package:app/models/models.dart';
+import 'package:app/screens/AnimalFormScreen.dart';
 import 'package:app/screens/LoadScreen.dart';
 import 'package:app/services/animal_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 import 'animal_details_screen.dart';
 
 class MenuScreen extends StatelessWidget {
@@ -44,7 +47,7 @@ class MenuScreen extends StatelessWidget {
                 margin: EdgeInsets.all(10),
                 padding: EdgeInsets.all(8),
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.green, width: 2),
+                  border: Border.all(color: Colors.black, width: 2),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Column(
@@ -74,28 +77,42 @@ class MenuScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // Implementa la lógica para agregar un nuevo animal
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const AnimalFormScreen()),
+          );
         },
         child: const Icon(
           Icons.add,
           size: 40,
-          color: Colors.blueGrey,
+          color: Colors.black,
         ),
       ),
       persistentFooterButtons: [
         Container(
-          color: Colors.lightBlue,
+          color: Colors.red,
           height: 60,
           child: Center(
             child: IconButton(
               icon: const Icon(Icons.save, size: 30, color: Colors.blueGrey),
-              onPressed: () {
-                // Implementa la lógica para guardar localmente
+              onPressed: () async {
+                await animalService.saveLocally(listAnimales);
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                      content: Text('Animales guardados localmente')),
+                );
               },
             ),
           ),
         ),
       ],
     );
+  }
+
+  Future<void> saveAnimalesLocal(List<AnimalModel> animales) async {
+    final prefs = await SharedPreferences.getInstance();
+    final animalesJson = animales.map((animal) => animal.toJson()).toList();
+    await prefs.setStringList(
+        'animales', animalesJson.map((e) => jsonEncode(e)).toList());
   }
 }

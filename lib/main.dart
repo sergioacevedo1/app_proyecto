@@ -1,6 +1,5 @@
 import 'package:app/screens/AnimalScreen.dart';
 import 'package:app/screens/LocalScreen.dart';
-import 'package:app/screens/animal_details_screen.dart';
 import 'package:app/screens/screens.dart';
 import 'package:app/services/uiChange_service.dart';
 import 'package:flutter/material.dart';
@@ -19,10 +18,8 @@ class AppState extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(
-            create: (_) => AnimalService()), // Cambia a tu servicio de animales
-        ChangeNotifierProvider(
-            create: (_) => UIAnimalService()), // Cambia a tu servicio UI
+        ChangeNotifierProvider(create: (_) => AnimalService()),
+        ChangeNotifierProvider(create: (_) => UIAnimalService()),
 
         // Puedes agregar más providers según sea necesario
       ],
@@ -46,10 +43,9 @@ class MyApp extends StatelessWidget {
         'local': (context) => const AnimalLocalScreen(),
       },
       theme: ThemeData(
-        hintColor: Colors.green,
-        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue)
-            .copyWith(
-                background: Colors.white), // Color de fondo de la aplicación
+        hintColor: Colors.red,
+        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.red).copyWith(
+            background: Colors.white), // Color de fondo de la aplicación
         // Ajusta otros atributos de tema
       ),
     );

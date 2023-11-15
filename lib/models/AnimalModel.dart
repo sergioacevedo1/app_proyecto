@@ -6,13 +6,13 @@ AnimalModel animalModelFromJson(String str) =>
 String animalModelToJson(AnimalModel data) => json.encode(data.toJson());
 
 class AnimalModel {
-  int? id;
+  String? id;
   String nombre;
   int edad;
   String estado;
 
   AnimalModel({
-    required this.id,
+    this.id,
     required this.nombre,
     required this.edad,
     required this.estado,
