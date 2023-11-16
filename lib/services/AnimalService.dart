@@ -19,7 +19,7 @@ class AnimalServiceLocal extends ChangeNotifier {
   }
 
   create(AnimalModel animal) async {
-    final String res = (await AnimalSQLiteService.db.insertAnimal(animal));
+    final int res = (await AnimalSQLiteService.db.insertAnimal(animal));
     animal.id = res;
     return animal;
   }

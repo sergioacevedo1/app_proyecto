@@ -1,5 +1,5 @@
 import 'package:app/models/models.dart';
-import 'package:app/services/animal_service.dart';
+import 'package:app/services/AnimalService.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -46,7 +46,6 @@ class _AnimalFormScreenState extends State<AnimalFormScreen> {
                   print('Boton presionado');
 
                   AnimalModel newAnimal = AnimalModel(
-                    id: '',
                     nombre: _nombreController.text,
                     edad: int.parse(_edadController.text),
                     estado: _estadoController.text,
@@ -55,7 +54,7 @@ class _AnimalFormScreenState extends State<AnimalFormScreen> {
 
                   // Guardar localmente utilizando AnimalService
                   final animalService =
-                      Provider.of<AnimalService>(context, listen: false);
+                      Provider.of<AnimalServiceLocal>(context, listen: false);
                   await animalService.create(newAnimal);
                   print('Animal guardado localmente');
 

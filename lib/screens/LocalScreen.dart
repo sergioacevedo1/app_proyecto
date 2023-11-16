@@ -1,7 +1,7 @@
 import 'package:app/models/AnimalModel.dart';
 import 'package:app/screens/animal_details_screen.dart';
 import 'package:app/screens/screens.dart';
-import 'package:app/services/animal_service.dart';
+import 'package:app/services/AnimalService.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -10,7 +10,7 @@ class AnimalLocalScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final animalService = Provider.of<AnimalService>(context);
+    final animalService = Provider.of<AnimalServiceLocal>(context);
     //AnimalService.getAllAnimales();
     List<AnimalModel> animales = animalService.animales;
 
@@ -41,7 +41,7 @@ class AnimalLocalScreen extends StatelessWidget {
                 IconButton(
                   icon: const Icon(Icons.delete),
                   onPressed: () {
-                    animalService.delete(animales[index]);
+                    animalService.delete(animales[index].id!);
                   },
                 ),
               ],

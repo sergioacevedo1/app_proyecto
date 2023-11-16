@@ -1,7 +1,7 @@
 import 'package:app/models/models.dart';
+import 'package:app/services/AnimalService.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../services/animal_service.dart';
 
 class AnimalScreen extends StatefulWidget {
   AnimalScreen({Key? key, AnimalModel? dataReceived}) {
@@ -21,7 +21,7 @@ class _AnimalScreenState extends State<AnimalScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final animalService = Provider.of<AnimalService>(context);
+    final animalService = Provider.of<AnimalServiceLocal>(context);
     bool isNew = true;
 
     if (widget.reg != null) {
@@ -61,9 +61,9 @@ class _AnimalScreenState extends State<AnimalScreen> {
                     onPressed: () async {
                       asignarAnimal();
                       if (isNew) {
-                        await animalService.post(widget.reg!);
+                        await animalService.create(widget.reg!);
                       } else {
-                        await animalService.put(widget.reg!);
+                        await animalService.update(widget.reg!);
                       }
                       Navigator.pop(context);
                     },

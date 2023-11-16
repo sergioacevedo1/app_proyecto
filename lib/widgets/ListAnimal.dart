@@ -1,9 +1,9 @@
 import 'package:app/models/models.dart';
+import 'package:app/services/AnimalService.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../screens/AnimalScreen.dart';
-import '../services/animal_service.dart';
 
 class ListTitleAnimal extends StatelessWidget {
   const ListTitleAnimal({Key? key, required this.animal}) : super(key: key);
@@ -12,12 +12,12 @@ class ListTitleAnimal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final animalService = Provider.of<AnimalService>(context);
+    final animalService = Provider.of<AnimalServiceLocal>(context);
 
     return ListTile(
       leading: GestureDetector(
         onTap: () {
-          animalService.delete(animal.id as AnimalModel);
+          animalService.delete(animal.id!);
         },
         child: const Icon(Icons.delete, color: Colors.red),
       ),

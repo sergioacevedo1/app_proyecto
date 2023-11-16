@@ -6,8 +6,6 @@ import 'package:app/services/uiChange_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'services/animal_service.dart';
-
 void main() {
   runApp(const AppState());
 }
@@ -19,7 +17,6 @@ class AppState extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => AnimalService()),
         ChangeNotifierProvider(create: (_) => UIAnimalService()),
         ChangeNotifierProvider(create: (_) => AnimalServiceLocal()),
 

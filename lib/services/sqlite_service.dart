@@ -31,7 +31,7 @@ class AnimalSQLiteService {
       onCreate: (Database db, int version) async {
         await db.execute('''
           CREATE TABLE animales ( 
-            id TEXT PRIMARY KEY,
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
             nombre TEXT,
             edad INTEGER,
             estado TEXT
@@ -41,9 +41,9 @@ class AnimalSQLiteService {
     );
   }
 
-  Future<String> insertAnimal(AnimalModel animal) async {
+  Future<int> insertAnimal(AnimalModel animal) async {
     final db = await database;
-    final String id = (await db!.insert('animales', animal.toJson())) as String;
+    final int id = await db!.insert('animales', animal.toJson());
     return id;
   }
 
